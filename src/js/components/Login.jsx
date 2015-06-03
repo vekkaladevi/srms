@@ -49,14 +49,8 @@ var Login = React.createClass({
                  label="Email Address"
                  type="email" 
                  placeholder="Email Address"
-                 validations={{
-	                      isEmail: true,
-	                      maxLength: 50
-	                      }}
-                 validationErrors={{
-		                   isEmail: 'You have to type valid email',
-		                   maxLength: 'You can not type in more than 50 characters'
-		                     }}
+                 validations="isEmail" 
+                 validationError= 'You have to type valid email'
 	      />
 	      <Input                        
                  name="password"

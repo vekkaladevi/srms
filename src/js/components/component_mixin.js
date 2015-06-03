@@ -1,28 +1,27 @@
 import React from 'react';  
 
 var Formsy = require('formsy-react');
+var utils = require('./utils.js');
 
-class ComponentMixin {
-   constructor() {
+
+class ComponentMixin extends React.Component{
+   constructor(props) {
+       super(props);
        this.state = {
-           _value: "Hello",// this.props.value,
+           _value: props.value,
            _isRequired: false,
            _isValid: true,
            _isPristine: true,
-           _pristineValue: false, // this.props.value,
+           _pristineValue: props.value,
            _validationError: '',
            _externalError: null,
            _formSubmitted: false
        };
-       this.child = {};
    }
     componentWillMount(child) {
-        this.child = child;
-        this.props = child.props;
 
         var configure = function () {
          this.setValidations(this.props.validations, this.props.required);
-            console.log(this);
             this.props._attachToForm(this);
         }.bind(this);
 
@@ -67,12 +66,6 @@ class ComponentMixin {
         this._validations = this.convertValidationsToObject(validations) || {};
         this._requiredValidations = required === true ? {isDefaultRequiredValue: true} : this.convertValidationsToObject(required);
 
-    }
-
-    setState(state) {
-        console.log("setState");
-        console.log(this.child);
-        this.child.setState(state);
     }
 
     // We validate after the value has been set
