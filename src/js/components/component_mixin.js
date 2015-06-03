@@ -18,7 +18,7 @@ class ComponentMixin extends React.Component{
            _formSubmitted: false
        };
    }
-    componentWillMount(child) {
+    componentWillMount() {
 
         var configure = function () {
          this.setValidations(this.props.validations, this.props.required);
@@ -61,22 +61,22 @@ class ComponentMixin extends React.Component{
     }
 
     setValidations(validations, required) {
-
         // Add validations to the store itself as the props object can not be modified
         this._validations = this.convertValidationsToObject(validations) || {};
         this._requiredValidations = required === true ? {isDefaultRequiredValue: true} : this.convertValidationsToObject(required);
-
     }
 
+    
     // We validate after the value has been set
-    setValue(value) {
-        this.setState({
-            _value: value,
-            _isPristine: false
-        }, function () {
-            this.props._validate(this);
-        }.bind(this));
+    setValue (value) {
+	this.setState({
+	    _value: value,
+	    _isPristine: false
+	}, function () {
+	    this.props._validate(this);
+	}.bind(this));
     }
+    
     resetValue() {
         this.setState({
             _value: this.state._pristineValue,

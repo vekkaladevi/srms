@@ -1,18 +1,22 @@
 import React from 'react';  
-import mixins from 'es6-mixins';
 import ComponentMixin from './component_mixin';
 
 import '../../less/style.less';
 
 
 class Input extends ComponentMixin {
-  constructor(props) {
-    super(props);
-  }
-  
-  _onChange(event) {
-    super.setValue(event.currentTarget.value);
-  }
+    constructor(props) {
+	super(props);
+    }
+    
+
+    setValue(value) {
+	super.setValue(value);
+    }
+
+    _onChange(event) {
+	this.setValue(event.target.value);
+    }
   
   renderLabel() {
     let label;
@@ -46,9 +50,9 @@ class Input extends ComponentMixin {
           type={this.props.type}
           className={this.props.classname}
           {...this.props}
-          name={this.props.ref}
+          name={this.props.name}
           value={this.getValue()}
-          onChange={this._onChange}
+          onChange={this._onChange.bind(this)}
         />
         {this.renderMessage(this.props.message)}
       </div>
