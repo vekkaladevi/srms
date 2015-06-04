@@ -1,7 +1,7 @@
 import React from 'react';  
 
 var Formsy = require('formsy-react');
-var utils = require('./utils.js');
+var _ = require('underscore');
 
 
 class ComponentMixin extends React.Component{
@@ -54,7 +54,7 @@ class ComponentMixin extends React.Component{
 
         // If the value passed has changed, set it. If value is not passed it will
         // internally update, and this will never run
-        if (!utils.isSame(this.props.value, prevProps.value)) {
+        if (!_.isEqual(this.props.value, prevProps.value)) {
             this.setValue(this.props.value);
         }
     }
