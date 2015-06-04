@@ -43,12 +43,13 @@ var Login = React.createClass({
                ref="form"
                >
 	      <Input 
-                 name="email"
-                 required
-                 value="" 
-                 label="Email Address"
                  type="email" 
+                 name="email"
+                 label="Email Address"
                  placeholder="Email Address"
+                 value="" 
+                 className=""
+                 required
                  validations="isEmail" 
                  validationError= 'You have to type valid email'
 	      />

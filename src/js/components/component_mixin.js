@@ -5,9 +5,13 @@ var utils = require('./utils.js');
 
 
 class ComponentMixin extends React.Component{
-   constructor(props) {
-       super(props);
-       this.state = {
+    _bind(...methods) {
+        methods.forEach( (method) => this[method] = this[method].bind(this) );
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
            _value: props.value,
            _isRequired: false,
            _isValid: true,

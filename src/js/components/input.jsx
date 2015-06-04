@@ -2,11 +2,12 @@ import React from 'react';
 import ComponentMixin from './component_mixin';
 
 import '../../less/style.less';
-
+var _ = require('underscore');
 
 class Input extends ComponentMixin {
     constructor(props) {
-	super(props);
+      super(props);
+      this._bind('_onChange');
     }
     
 
@@ -43,16 +44,23 @@ class Input extends ComponentMixin {
   }
   render() {
     let classes = "form-group";
+
+
+    let reqKeys = ['name', 'type', 'value', 'placeholder', 'className'];
+    let _props = _.pick(this.props, reqKeys);
+    let _classname = _props.className || "form-control";    
+    let other = _.omit(this.props, reqKeys);
+
     return(
-      <div className={classes} ref={this.props.ref}>
-        {this.renderLabel}
+      <div className={classes}>
+        {this.renderLabel()}
         <input
-          type={this.props.type}
-          className={this.props.classname}
-          {...this.props}
-          name={this.props.name}
-          value={this.getValue()}
-          onChange={this._onChange.bind(this)}
+           type={_props.type}
+           name={_props.name}
+           value={this.getValue()}
+           className={_classname}
+           {...other}
+           onChange={this._onChange}
         />
         {this.renderMessage(this.props.message)}
       </div>
