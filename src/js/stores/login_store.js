@@ -16,10 +16,11 @@ class LoginStore extends EventEmitter {
     }
     
     authenticate(credentials) {
+	this.loginInfo.authenticated = false;
+	this.loginInfo.errors = [];
 	// send ajax request to server
 	if (credentials.email === 'vijay.ekkaladevi@gmail.com') {
 	    this.loginInfo.authenticated = true;
-	    this.loginInfo.errors = [];
 	} else {
 	    this.loginInfo.errors.push("Sorry we dont recognize this user");
 	}

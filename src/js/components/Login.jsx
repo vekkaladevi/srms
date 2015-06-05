@@ -8,81 +8,103 @@ var LoginStore = require('../stores/login_store');
 
 
 var Login = React.createClass({
-  displayName: "Login",
-  getInitialState: function() {
-      return {
-	  validatePristine: false,
-	  disabled: false,
-	  loading: false,
-	  errors: ''
-      };
-  },
-  
-  componentDidMount: function() {
-      LoginStore.addChangeListener(this._onChange);
-  },
-  
-  componentWillUnmount: function() {
-      LoginStore.removeChangeListener(this._onChange);
-  },
-  
-  _onChange: function() {
-      console.log(LoginStore);
-      var li = LoginStore.getLoginInfo();  
-      if (li.authenticated) {
-	  this.setState({
-	      loading: false,
-	      errors: ''
-	  });
-      } else {
-	  var _errors = li.errors.join();
-	  this.setState({
-	      loading: false,
-	      errors: _errors
-	  });
-      }
-  },
-   resetForm: function() {
-    this.refs.form.reset();
-  },
-  
-  submitForm: function(data) {
-      this.setState({loading: true});
+    displayName: "Login",
+    getInitialState: function() {
+	return {
+	    validatePristine: false,
+	    disabled: false,
+	    loading: false,
+	    errors: '',
+	    loggedIn: false
+	};
+    },
+    
+    componentDidMount: function() {
+	LoginStore.addChangeListener(this._onChange);
+    },
+    
+    componentWillUnmount: function() {
+	LoginStore.removeChangeListener(this._onChange);
+    },
+    
+    _onChange: function() {
 
-      LoginAction.authenticate(data);
-      /*
-	 this.refs.form.setInputValidationErrors(
-	 {
-         'email': 'Email address is taken'
-	 });   
-       */
+	var li = LoginStore.getLoginInfo();  
+	if (li.authenticated) {
+	    this.setState({
+		loading: false,
+		errors: '',
+		loggedIn: true
+	    });
+	    var { router } = this.context;
+	    var nextPath = router.getCurrentQuery().nextPath;
+	    if (nextPath) {
+		router.replaceWith(nextPath);
+	    } else {
+		router.replaceWith('/');
+	    }
+	} else {
+	    var _errors = li.errors.join();
+	    this.setState({
+		loading: false,
+		errors: _errors
+	    });
+	}
+    },
+    resetForm: function() {
+	this.refs.form.reset();
+    },
+    
+    submitForm: function(data) {
+	this.setState({
+	    loading: true,
+	    loggedIn: false,
+	    errors: ''
+	});
 
-  },
-  
-  loginFailure: function(errors) {
-      this.setState({loading: false, });
-      
-  },
+	LoginAction.authenticate(data);
+	/*
+	   this.refs.form.setInputValidationErrors(
+	   {
+           'email': 'Email address is taken'
+	   });   
+	 */
 
-  renderForm: function() {
-      if (this.state.loading) {
-	  return (
-	      <h1>Loading ....</h1>
-	  );
-      }
+    },
+    
+    loginFailure: function(errors) {
+	this.setState({loading: false, });
+	
+    },
 
-      if (this.state.errors) {
-	  return (
-	      <h1>{this.state.errors}</h1>
-	  );
-      }
-      
+    renderErrors: function() {
+	var errors;
+	
+	if (this.state.errors) {
+	    errors = (
+		<h1>{this.state.errors}</h1>
+	    );
+	}
+	return errors;
+    },
+
+    renderForm: function() {
+	if (this.state.loggedIn) {
+	    return 
+	}
+	if (this.state.loading) {
+	    return (
+		<h1>Loading ....</h1>
+	    );
+	}
+
       return (
 	    <Formsy.Form 
                className="formClassName" 
                onSubmit={this.submitForm} 
                ref="form"
                >
+	      {this.renderErrors()}
 	      <Input 
                  type="email" 
                  name="email"
@@ -140,5 +162,9 @@ var Login = React.createClass({
     );
   }
 });
+
+Login.contextTypes = {
+  router: React.PropTypes.func
+};
 
 export default Login;  
