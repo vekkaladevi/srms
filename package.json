@@ -22,6 +22,7 @@
     "express-session": "^1.11.2",
     "extract-text-webpack-plugin": "^0.8.1",
     "file-loader": "^0.8.4",
+    "flux": "^2.0.3",
     "formsy-react": "^0.14.1",
     "image-webpack-loader": "^1.4.0",
     "imagemin": "^3.2.0",

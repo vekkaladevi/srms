@@ -3,40 +3,81 @@ import '../../less/style.less';
 
 var Formsy = require('formsy-react');
 var Input = require('./input');
+var LoginAction = require('../actions/login_action');
+var LoginStore = require('../stores/login_store');
 
 
 var Login = React.createClass({
   displayName: "Login",
   getInitialState: function() {
-    return {
-      validatePristine: false,
-      disabled: false
-    };
+      return {
+	  validatePristine: false,
+	  disabled: false,
+	  loading: false,
+	  errors: ''
+      };
   },
   
-  resetForm: function() {
+  componentDidMount: function() {
+      LoginStore.addChangeListener(this._onChange);
+  },
+  
+  componentWillUnmount: function() {
+      LoginStore.removeChangeListener(this._onChange);
+  },
+  
+  _onChange: function() {
+      console.log(LoginStore);
+      var li = LoginStore.getLoginInfo();  
+      if (li.authenticated) {
+	  this.setState({
+	      loading: false,
+	      errors: ''
+	  });
+      } else {
+	  var _errors = li.errors.join();
+	  this.setState({
+	      loading: false,
+	      errors: _errors
+	  });
+      }
+  },
+   resetForm: function() {
     this.refs.form.reset();
   },
   
   submitForm: function(data) {
-    console.log(data);
-/*
-    this.refs.form.setInputValidationErrors(
-      {
-        'email': 'Email address is taken'
-      });   
-*/
+      this.setState({loading: true});
+
+      LoginAction.authenticate(data);
+      /*
+	 this.refs.form.setInputValidationErrors(
+	 {
+         'email': 'Email address is taken'
+	 });   
+       */
 
   },
   
-  
-  changeProp: function(name, value) {
-    var newState = {};
-    newState[name] = value;
-    this.setState(newState);
+  loginFailure: function(errors) {
+      this.setState({loading: false, });
+      
   },
+
   renderForm: function() {
-    return (
+      if (this.state.loading) {
+	  return (
+	      <h1>Loading ....</h1>
+	  );
+      }
+
+      if (this.state.errors) {
+	  return (
+	      <h1>{this.state.errors}</h1>
+	  );
+      }
+      
+      return (
 	    <Formsy.Form 
                className="formClassName" 
                onSubmit={this.submitForm} 
