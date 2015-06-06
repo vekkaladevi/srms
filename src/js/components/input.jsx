@@ -23,7 +23,7 @@ class Input extends ComponentMixin {
     let label;
     if (this.props.label) {
       label = (
-          <label htmlFor={this.props.name}>{this.props.label}</label>
+          <label htmlFor={this.props.name} className="control-label">{this.props.label}</label>
       );
     }
     return label;
@@ -39,11 +39,11 @@ class Input extends ComponentMixin {
   */
   renderMessage(message) {
     return(
-      <span>{message}</span>
+      <span className="help-block validation-message">{message}</span>
     );
   }
   render() {
-    let classes = "form-group";
+    let classes = this.showError() ? "form-group has-error" : "form-group";
 
 
     let reqKeys = ['name', 'type', 'value', 'placeholder', 'className'];
@@ -64,7 +64,7 @@ class Input extends ComponentMixin {
            {...other}
            onChange={this._onChange}
         />
-        {this.renderMessage(this.props.message)}
+        {this.renderMessage(this.getErrorMessage())}
       </div>
     );
   }
