@@ -18,8 +18,8 @@ class MainMenu extends React.Component {
 		</div>
 		<div>
 		  <ul className="nav navbar-nav navbar-right">
-		    <li><a href="#"><span className="glyphicon glyphicon-user"></span> Sign Up</a></li>
-		    <li><Link to="login">Login<span className="glyphicon glyphicon-log-in"></span></Link></li>
+		    <li><Link to="signup">Signup</Link></li>
+		    <li><Link to="login">Login</Link></li>
 		  </ul>
 		</div>
 	      </div>

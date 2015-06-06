@@ -98,7 +98,7 @@ var Login = React.createClass({
 	    );
 	}
 
-      return (
+	return (
 	    <Formsy.Form 
                className="formClassName" 
                onSubmit={this.submitForm} 
@@ -131,26 +131,21 @@ var Login = React.createClass({
 		                   minLength: 'Too short',
 		                   maxLength: 'You can not type in more than 50 characters'
 		                   }}
-	      />              
-	      <div className="form-group">
-		<input className="btn btn-warning" 
-                       type="reset" 
-                       value="Cancel"
-                />
-		<span> </span>
-		<input className="btn btn-primary" 
-                       formNoValidate="" 
-                       type="submit" 
-                       value="Submit"
-                />
-	      </div>
+	    />              
+	    <button 
+                className="btn btn-danger btn-lg btn-block" 
+                formNoValidate="" 
+                type="submit"
+		>
+	      Login
+	    </button>
 	    </Formsy.Form>
     );
     
   },
   render: function() {
     return (
-      <div className="container-fluid">
+      <div className="container">
 	<div className="row">
 	  <div className="col-md-3"/>
 	  <div className="col-md-6 col-xs-12">

@@ -50,13 +50,15 @@ class Input extends ComponentMixin {
     let _props = _.pick(this.props, reqKeys);
     let _classname = _props.className || "form-control";    
     let other = _.omit(this.props, reqKeys);
-
+    let type = _props.type || "text";
+      
     return(
-      <div className={classes}>
-        {this.renderLabel()}
-        <input
-           type={_props.type}
-           name={_props.name}
+	<div className={classes}>
+          {this.renderLabel()}
+        <input 
+           type={type}
+	   name={_props.name}
+	   placeholder={_props.placeholder}
            value={this.getValue()}
            className={_classname}
            {...other}

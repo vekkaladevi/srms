@@ -4,6 +4,7 @@ import '../less/style.less';
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 
 import LoginHandler from './components/Login';
+import SignupHandler from './components/Signup';
 import MainMenu from './components/MainMenu';
 
 class App extends React.Component{  
@@ -23,6 +24,7 @@ class App extends React.Component{
 
 let routes = (  
 	<Route name="app" path="/" handler={App}>
+	<Route name="signup" path="/signup" handler={SignupHandler}/>
 	<Route name="login" path="/login" handler={LoginHandler}/>
 	</Route>
 );
