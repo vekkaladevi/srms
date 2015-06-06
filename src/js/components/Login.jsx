@@ -1,61 +1,65 @@
 import React from 'react';
 import '../../less/style.less';
 
-var Formsy = require('formsy-react');
-var Input = require('./input');
-var LoginAction = require('../actions/login_action');
-var LoginStore = require('../stores/login_store');
+import Formsy from 'formsy-react';
+import Input from './input';
+import Alert from './alert';
+
+import LoginAction from '../actions/login_action';
+import LoginStore from '../stores/login_store';
 
 
-var Login = React.createClass({
-    displayName: "Login",
-    getInitialState: function() {
-	return {
+class Login extends React.Component {
+    constructor() {
+	super();
+	this.state = {
 	    validatePristine: false,
 	    disabled: false,
 	    loading: false,
 	    errors: '',
-	    loggedIn: false
+	    loggedIn: false,
 	};
-    },
+    }
     
-    componentDidMount: function() {
-	LoginStore.addChangeListener(this._onChange);
-    },
+    componentDidMount(){
+	LoginStore.addChangeListener(this._onChange.bind(this));
+    }
     
-    componentWillUnmount: function() {
-	LoginStore.removeChangeListener(this._onChange);
-    },
+    componentWillUnmount() {
+	LoginStore.removeChangeListener(this._onChange.bind(this));
+    }
     
-    _onChange: function() {
 
-	var li = LoginStore.getLoginInfo();  
+    _onChange() {
+	let li = LoginStore.getLoginInfo();  
+
 	if (li.authenticated) {
 	    this.setState({
 		loading: false,
 		errors: '',
 		loggedIn: true
 	    });
-	    var { router } = this.context;
-	    var nextPath = router.getCurrentQuery().nextPath;
+	    let { router } = this.context;
+	    let nextPath = router.getCurrentQuery().nextPath;
 	    if (nextPath) {
 		router.replaceWith(nextPath);
 	    } else {
 		router.replaceWith('/');
 	    }
 	} else {
-	    var _errors = li.errors.join();
+	    let _errors = li.errors.join();
 	    this.setState({
 		loading: false,
 		errors: _errors
 	    });
 	}
-    },
-    resetForm: function() {
+    }
+
+    resetForm() {
 	this.refs.form.reset();
-    },
+    }
     
-    submitForm: function(data) {
+    submitForm(data) {
 	this.setState({
 	    loading: true,
 	    loggedIn: false,
@@ -63,32 +67,26 @@ var Login = React.createClass({
 	});
 
 	LoginAction.authenticate(data);
-	/*
-	   this.refs.form.setInputValidationErrors(
-	   {
-           'email': 'Email address is taken'
-	   });   
-	 */
-
-    },
+    }
     
-    loginFailure: function(errors) {
+    loginFailure(errors) {
 	this.setState({loading: false, });
-	
-    },
+    }
 
-    renderErrors: function() {
-	var errors;
+    renderErrors() {
+	let errors;
 	
 	if (this.state.errors) {
 	    errors = (
-		<h1>{this.state.errors}</h1>
+		<Alert style="danger">
+		<h3>{this.state.errors}</h3>
+		</Alert>
 	    );
 	}
 	return errors;
-    },
+    }
 
-    renderForm: function() {
+    renderForm() {
 	if (this.state.loggedIn) {
 	    return 
 	}
@@ -101,10 +99,10 @@ var Login = React.createClass({
 	return (
 	    <Formsy.Form 
                className="formClassName" 
-               onSubmit={this.submitForm} 
+               onSubmit={this.submitForm.bind(this)} 
                ref="form"
                >
-	      {this.renderErrors()}
+
 	      <Input 
                  type="email" 
                  name="email"
@@ -139,27 +137,28 @@ var Login = React.createClass({
 		>
 	      Login
 	    </button>
-	    </Formsy.Form>
-    );
+		  </Formsy.Form>
+	);
+    }
     
-  },
-  render: function() {
-    return (
-      <div className="container">
-	<div className="row">
-	  <div className="col-md-3"/>
-	  <div className="col-md-6 col-xs-12">
-            {this.renderForm()}
-	  </div>
-	  <div className="col-md-3"/>
-	</div>
-      </div>
-    );
-  }
-});
-
-Login.contextTypes = {
-  router: React.PropTypes.func
+    render() {
+	return (
+	    <div className="container">
+	      <div className="row">
+		<div className="col-md-3"/>
+		<div className="col-md-6 col-xs-12">
+		  {this.renderErrors()}
+		  {this.renderForm()}
+		</div>
+		<div className="col-md-3"/>
+		</div>
+		</div>
+	);
+    }
 };
 
+Login.contextTypes = {
+    router: React.PropTypes.func
+};
+		
 export default Login;  
