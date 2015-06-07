@@ -3,10 +3,10 @@ import '../../less/style.less';
 
 import Formsy from 'formsy-react';
 import Input from './input';
-import Alert from './alert';
+import AlertPanel from './alert_panel';
 
-import LoginAction from '../actions/login_action';
-import LoginStore from '../stores/login_store';
+import UserAction from '../actions/user_action';
+import UserStore from '../stores/user_store';
 
 
 class Login extends React.Component {
@@ -22,16 +22,16 @@ class Login extends React.Component {
     }
     
     componentDidMount(){
-	LoginStore.addChangeListener(this._onChange.bind(this));
+	UserStore.addChangeListener(this._onChange.bind(this));
     }
     
     componentWillUnmount() {
-	LoginStore.removeChangeListener(this._onChange.bind(this));
+	UserStore.removeChangeListener(this._onChange.bind(this));
     }
     
 
     _onChange() {
-	let li = LoginStore.getLoginInfo();  
+	let li = UserStore.getLoginInfo();  
 
 	if (li.authenticated) {
 	    this.setState({
@@ -66,7 +66,7 @@ class Login extends React.Component {
 	    errors: ''
 	});
 
-	LoginAction.authenticate(data);
+	UserAction.login(data);
     }
     
     loginFailure(errors) {
@@ -76,13 +76,12 @@ class Login extends React.Component {
     renderErrors() {
 	let errors;
 	
-	if (this.state.errors) {
+	if (this.state.errors.length) {
 	    errors = (
-		<Alert style="danger">
-		<h3>{this.state.errors}</h3>
-		</Alert>
+		<AlertPanel style="danger">{this.state.errors}</AlertPanel>
 	    );
 	}
+
 	return errors;
     }
 

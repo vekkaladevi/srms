@@ -2,7 +2,9 @@ var AppDispatcher = require('../dispatcher/srms_dispatcher.js');
 
 import EventEmitter from 'events';
 
-class LoginStore extends EventEmitter {
+var users= [];
+
+class UserStore extends EventEmitter {
     constructor() {
 	super();
 	this.loginInfo = {
@@ -15,7 +17,14 @@ class LoginStore extends EventEmitter {
 	return this.loginInfo;	
     }
     
-    authenticate(credentials) {
+    getSignupStatus() {
+	return ({
+	    status: true,
+	    errors: ["User name taken", "Email already exists"] 
+	});
+    }
+    
+    login(credentials) {
 	this.loginInfo.authenticated = false;
 	this.loginInfo.errors = [];
 	// send ajax request to server
@@ -24,6 +33,10 @@ class LoginStore extends EventEmitter {
 	} else {
 	    this.loginInfo.errors.push("Sorry we dont recognize this user");
 	}
+    }
+    
+    signup(userInfo) {
+
     }
     
     addChangeListener(callback) {
@@ -35,15 +48,18 @@ class LoginStore extends EventEmitter {
     }
 };
 
-var ls = new LoginStore();
+var us = new UserStore();
 
 AppDispatcher.register(function(payload) {
     switch(payload.eventName) {
-	case 'authenticate': 
-	ls.authenticate(payload.data);
+	case 'login': 
+	us.login(payload.data);
+	break;
+	case 'signup':
+	us.signup(payload.data);
 	break;
     }
-    ls.emit('change')
+    us.emit('change');
 });
 
-export default ls;
+export default us;

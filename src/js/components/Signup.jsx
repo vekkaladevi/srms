@@ -4,37 +4,72 @@ import '../../less/style.less';
 import Formsy from 'formsy-react';
 import Input from './input';
 import Checkbox from './checkbox';
+import AlertPanel from './alert_panel';
+
+import UserAction from '../actions/user_action';
+import UserStore from '../stores/user_store';
 
 class Signup extends React.Component {
     constructor() {
 	super();
 	this.state =  {
-	    errors: ""
+	    errors: [],
+	    loading: false
 	};
     }
 
+    componentDidMount(){
+	UserStore.addChangeListener(this._onChange.bind(this));
+    }
+    
+    componentWillUnmount() {
+	UserStore.removeChangeListener(this._onChange.bind(this));
+    }
+    
+
+    _onChange() {
+	let reply = UserStore.getSignupStatus();
+	if (reply.status) {
+	    this.setState({ loading: false, errors: []});
+	    let { router } = this.context;
+	    let nextPath = router.getCurrentQuery().nextPath;
+	    if (nextPath) {
+		router.replaceWith(nextPath);
+	    } else {
+		router.replaceWith('/');
+	    }
+	} else {
+	    this.setState({ loading: false, errors: reply.errors});
+	}	
+    }
     submitForm(data) {
-	console.log(data);
+	this.setState({ loading: true, errors: []});
+	UserAction.signup(data);
     }
     renderErrors() {
 	let errors;
-	
-	if (this.state.errors) {
+
+	if (this.state.errors.length) {
 	    errors = (
-		<h1>{this.state.errors}</h1>
+		<AlertPanel style="danger">{this.state.errors}</AlertPanel>
 	    );
 	}
 	return errors;
     }
     
     renderForm() {
+	if (this.state.loading) {
+	    return (
+		<h1>Loading ....</h1>
+	    );
+	}
 	return (
 	    <Formsy.Form 
                className="formClassName" 
-               onSubmit={this.submitForm} 
+               onSubmit={this.submitForm.bind(this)} 
                ref="form"
             >
-	    {this.renderErrors()}
+
 	    <Input 
                 name="firstName"
 	        label="First Name"
@@ -110,11 +145,16 @@ class Signup extends React.Component {
     render() {
 	return (
 	    <div className="container col-md-4 col-md-offset-4">
+	      {this.renderErrors()}
 	      {this.renderForm()}
 	    </div>
 	);
     }
 	   
+};
+
+Signup.contextTypes = {
+    router: React.PropTypes.func
 };
 
 export default Signup;

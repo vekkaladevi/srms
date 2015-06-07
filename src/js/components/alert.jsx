@@ -6,7 +6,8 @@ class Alert extends React.Component {
     }
     componentDidMount() {
 	if (this.props.dismissAfter && this.props.onDismiss) {
-	    this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
+	    this.dismissTimer = setTimeout(this.props.onDismiss, 
+					   this.props.dismissAfter);
 	}
     }
     
@@ -26,14 +27,29 @@ class Alert extends React.Component {
 	);
     }
 
+    renderMessageList() {
+	let messages = this.props.children.map((message,i) => (
+	    <li key={i}>{message}</li>
+	));
+
+
+	let messageList;
+	if (messages.length) {
+	    messageList = (
+		<ul>{messages}</ul>
+	    );
+	}
+	return messageList;
+    }
     render() {
 	let style = this.props.style ? `${this.props.style}` : 'info';
 	let classes = `alert  alert-${style}`;
         let isDismissable = this.props.dismissable;
+
 	return (
 	    <div className={classes}>
 	      {isDismissable ? this.renderDismissButton() : null}
-	      {this.props.children}
+	    {this.renderMessageList()}
 	    </div>
 	);
     }
