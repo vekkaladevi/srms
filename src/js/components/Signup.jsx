@@ -1,8 +1,9 @@
 import React from 'react';
 import '../../less/style.less';
 
-var Formsy = require('formsy-react');
-var Input = require('./input');
+import Formsy from 'formsy-react';
+import Input from './input';
+import Checkbox from './checkbox';
 
 class Signup extends React.Component {
     constructor() {
@@ -11,6 +12,7 @@ class Signup extends React.Component {
 	    errors: ""
 	};
     }
+
     submitForm(data) {
 	console.log(data);
     }
@@ -24,6 +26,7 @@ class Signup extends React.Component {
 	}
 	return errors;
     }
+    
     renderForm() {
 	return (
 	    <Formsy.Form 
@@ -89,6 +92,11 @@ class Signup extends React.Component {
 		                   maxLength: 'You can not type in more than 50 characters'
 		 }}
 	    />             
+	    <Checkbox name="terms"
+		      type="checkbox"
+		      label="I agree to the terms and conditions"
+		      value =""
+		      />
 	    <button 
                 className="btn btn-primary btn-lg btn-block" 
                 formNoValidate="" 
