@@ -20,7 +20,7 @@ class UserStore extends EventEmitter {
     
     getSignupStatus() {
 	return ({
-	    status: true,
+	    status: false,
 	    errors: ["User name taken", "Email already exists"] 
 	});
     }

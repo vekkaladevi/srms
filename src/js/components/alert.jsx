@@ -16,25 +16,29 @@ class Alert extends React.Component {
     }
 
     renderDismissButton() {
-	return (
-	    <button
+	let showDismiss;
+	if (this.props.dismissable) {
+	    showDismiss =  (
+	       <button
         type="button"
         className="close"
         onClick={this.props.onDismiss}
         aria-hidden="true">
-	    &times;
-	    </button>
-	);
+	       &times;
+	       </button>
+	    )
+	}
+	return showDismiss;
     }
 
     renderMessageList() {
-	let messages = this.props.children.map((message,i) => (
+	let messages = React.Children.map(this.props.children, (message,i) => (
 	    <li key={i}>{message}</li>
 	));
 
 
 	let messageList;
-	if (messages.length) {
+	if (React.Children.count(this.props.children)) {
 	    messageList = (
 		<ul>{messages}</ul>
 	    );
@@ -44,12 +48,12 @@ class Alert extends React.Component {
     render() {
 	let style = this.props.style ? `${this.props.style}` : 'info';
 	let classes = `alert  alert-${style}`;
-        let isDismissable = this.props.dismissable;
+        
 
 	return (
 	    <div className={classes}>
-	      {isDismissable ? this.renderDismissButton() : null}
-	    {this.renderMessageList()}
+	      {this.renderDismissButton()}
+	       {this.renderMessageList()}
 	    </div>
 	);
     }

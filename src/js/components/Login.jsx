@@ -77,7 +77,7 @@ class Login extends React.Component {
 
     renderErrors() {
 	let errors;
-	
+	console.log(this.state.errors);
 	if (this.state.errors.length) {
 	    errors = (
 		<AlertPanel style="danger">{this.state.errors}</AlertPanel>
