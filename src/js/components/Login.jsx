@@ -31,9 +31,9 @@ class Login extends React.Component {
     
 
     _onChange() {
-	let li = UserStore.getLoginInfo();  
+	let ui = UserStore.getUserInfo();  
 
-	if (li.authenticated) {
+	if (ui.loggedIn) {
 	    this.setState({
 		loading: false,
 		errors: '',
@@ -47,11 +47,13 @@ class Login extends React.Component {
 		router.replaceWith('/');
 	    }
 	} else {
-	    let _errors = li.errors.join();
-	    this.setState({
-		loading: false,
-		errors: _errors
-	    });
+	    let _errors = ui.errors.join();
+	    if (_errors.length) {
+		this.setState({
+		    loading: false,
+		    errors: _errors
+		});
+	    }
 	}
     }
 

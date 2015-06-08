@@ -13,6 +13,12 @@ class UserAction {
 	    data: userInfo
 	});
     }
+    static logout(userName) {
+	AppDispatcher.dispatch({
+	    eventName: 'logout',
+	    data: userName
+	});
+    }
 };
 
 export default UserAction;

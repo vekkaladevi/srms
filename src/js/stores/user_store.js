@@ -7,14 +7,15 @@ var users= [];
 class UserStore extends EventEmitter {
     constructor() {
 	super();
-	this.loginInfo = {
-	    authenticated: false,
+	this.userInfo = {
+	    loggedIn: false,
+	    userName: 'Guest',
 	    errors: []
 	};
     }
     
-    getLoginInfo() {
-	return this.loginInfo;	
+    getUserInfo() {
+	return this.userInfo;	
     }
     
     getSignupStatus() {
@@ -25,13 +26,14 @@ class UserStore extends EventEmitter {
     }
     
     login(credentials) {
-	this.loginInfo.authenticated = false;
-	this.loginInfo.errors = [];
+	this.userInfo.loggedIn = false;
+	this.userInfo.errors = [];
 	// send ajax request to server
 	if (credentials.email === 'vijay.ekkaladevi@gmail.com') {
-	    this.loginInfo.authenticated = true;
+	    this.userInfo.loggedIn = true;
+	    this.userInfo.userName = "Vijay";
 	} else {
-	    this.loginInfo.errors.push("Sorry we dont recognize this user");
+	    this.userInfo.errors.push("Sorry we dont recognize this user");
 	}
     }
     
@@ -39,6 +41,10 @@ class UserStore extends EventEmitter {
 
     }
     
+    logout(userInfo) {
+	this.userInfo.loggedIn = false;
+	this.userInfo.userName = 'Guest';
+    }
     addChangeListener(callback) {
 	this.on('change', callback);
     }
@@ -58,6 +64,10 @@ AppDispatcher.register(function(payload) {
 	case 'signup':
 	us.signup(payload.data);
 	break;
+	case 'logout':
+	us.logout(payload.data);
+	break;
+
     }
     us.emit('change');
 });
