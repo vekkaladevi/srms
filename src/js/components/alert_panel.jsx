@@ -8,7 +8,6 @@ class AlertPanel extends React.Component {
 	super();
     }
     render() {
-	console.log(this.props.children);
 	return (
 	    <Alert style={this.props.style}>
 	      {this.props.children}
@@ -16,7 +15,7 @@ class AlertPanel extends React.Component {
 	);
     }
 };
-
+	    
 AlertPanel.defaultProps = {
     style: 'info',
     alerts: []

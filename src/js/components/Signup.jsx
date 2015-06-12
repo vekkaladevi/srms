@@ -16,14 +16,15 @@ class Signup extends React.Component {
 	    errors: [],
 	    loading: false
 	};
+	this._onSignupChange = this._onChange.bind(this);
     }
 
     componentDidMount(){
-	UserStore.addChangeListener(this._onChange.bind(this));
+	UserStore.addSignupListener(this._onSignupChange);
     }
     
     componentWillUnmount() {
-	UserStore.removeChangeListener(this._onChange.bind(this));
+	UserStore.removeSignupListener(this._onSignupChange);
     }
     
 
@@ -31,13 +32,6 @@ class Signup extends React.Component {
 	let reply = UserStore.getSignupStatus();
 	if (reply.status) {
 	    this.setState({ loading: false, errors: []});
-	    let { router } = this.context;
-	    let nextPath = router.getCurrentQuery().nextPath;
-	    if (nextPath) {
-		router.replaceWith(nextPath);
-	    } else {
-		router.replaceWith('/');
-	    }
 	} else {
 	    this.setState({ loading: false, errors: reply.errors});
 	}	
@@ -151,10 +145,6 @@ class Signup extends React.Component {
 	);
     }
 	   
-};
-
-Signup.contextTypes = {
-    router: React.PropTypes.func
 };
 
 export default Signup;

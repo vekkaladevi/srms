@@ -19,14 +19,15 @@ class Login extends React.Component {
 	    errors: '',
 	    loggedIn: false,
 	};
+	this._onLoginChange = this._onChange.bind(this);
     }
     
     componentDidMount(){
-	UserStore.addChangeListener(this._onChange.bind(this));
+	UserStore.addChangeListener(this._onLoginChange);
     }
     
     componentWillUnmount() {
-	UserStore.removeChangeListener(this._onChange.bind(this));
+	UserStore.removeChangeListener(this._onLoginChange);
     }
     
 
@@ -39,13 +40,6 @@ class Login extends React.Component {
 		errors: '',
 		loggedIn: true
 	    });
-	    let { router } = this.context;
-	    let nextPath = router.getCurrentQuery().nextPath;
-	    if (nextPath) {
-		router.replaceWith(nextPath);
-	    } else {
-		router.replaceWith('/');
-	    }
 	} else {
 	    let _errors = ui.errors.join();
 	    if (_errors.length) {
@@ -77,7 +71,6 @@ class Login extends React.Component {
 
     renderErrors() {
 	let errors;
-	console.log(this.state.errors);
 	if (this.state.errors.length) {
 	    errors = (
 		<AlertPanel style="danger">{this.state.errors}</AlertPanel>
@@ -158,8 +151,4 @@ class Login extends React.Component {
     }
 };
 
-Login.contextTypes = {
-    router: React.PropTypes.func
-};
-		
 export default Login;  

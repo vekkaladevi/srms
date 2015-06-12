@@ -1,6 +1,6 @@
-var AppDispatcher = require('../dispatcher/srms_dispatcher.js');
-
+import AppDispatcher from '../dispatcher/srms_dispatcher.js';
 import EventEmitter from 'events';
+import Router from '../lib/router.js';
 
 var users= [];
 
@@ -32,25 +32,32 @@ class UserStore extends EventEmitter {
 	if (credentials.email === 'vijay.ekkaladevi@gmail.com') {
 	    this.userInfo.loggedIn = true;
 	    this.userInfo.userName = "Vijay";
+	    Router.get().transitionTo("/");
 	} else {
 	    this.userInfo.errors.push("Sorry we dont recognize this user");
 	}
     }
     
     signup(userInfo) {
-
+	Router.get().transitionTo("/");	
     }
     
     logout(userInfo) {
 	this.userInfo.loggedIn = false;
 	this.userInfo.userName = 'Guest';
+	Router.get().transitionTo("/");
     }
     addChangeListener(callback) {
 	this.on('change', callback);
     }
-    
     removeChangeListener(callback) {
 	this.removeListener('change', callback);
+    }
+    addSignupListener(callback) {
+	this.on('signup', callback);
+    }
+    removeSignupListener(callback) {
+	this.removeListener('signup', callback);
     }
 };
 
