@@ -4,6 +4,11 @@ import '../../less/style.less';
 import Alert from './alert';
 
 class AlertPanel extends React.Component {
+    static defaultProps : {
+	  style: 'info',
+	  alerts: []
+    };
+
     constructor() {
 	super();
     }
@@ -16,10 +21,5 @@ class AlertPanel extends React.Component {
     }
 };
 	    
-AlertPanel.defaultProps = {
-    style: 'info',
-    alerts: []
-};
-
 export default AlertPanel;
 
