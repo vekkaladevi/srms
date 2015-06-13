@@ -30,7 +30,6 @@ class MainMenu extends React.Component {
     render() {
 	let userMenu;
 	let user = this.state.userInfo;
-
 	if (user.loggedIn) {
 	    userMenu = (
 		<ul className="nav navbar-nav navbar-right">

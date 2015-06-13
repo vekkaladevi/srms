@@ -11,13 +11,14 @@ import UserStore from '../stores/user_store';
 
 class Login extends React.Component {
     constructor() {
-	super();
+      super();
+      let ui = UserStore.getUserInfo();  
 	this.state = {
 	    validatePristine: false,
 	    disabled: false,
 	    loading: false,
-	    errors: '',
-	    loggedIn: false,
+	    errors:ui.errors,
+	    loggedIn: ui.loggedIn
 	};
 	this._onLoginChange = this._onChange.bind(this);
     }
@@ -33,7 +34,6 @@ class Login extends React.Component {
 
     _onChange() {
 	let ui = UserStore.getUserInfo();  
-
 	if (ui.loggedIn) {
 	    this.setState({
 		loading: false,
@@ -81,6 +81,7 @@ class Login extends React.Component {
     }
 
     renderForm() {
+      console.log("Login" + this.state.loggedIn);
 	if (this.state.loggedIn) {
 	    return 
 	}
