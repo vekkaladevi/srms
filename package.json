@@ -20,7 +20,7 @@
     "express": "^4.12.4",
     "express-react-engine": "^0.4.4",
     "express-session": "^1.11.2",
-    "extract-text-webpack-plugin": "^0.8.1",
+    "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "flux": "^2.0.3",
     "formsy-react": "^0.14.1",
@@ -29,14 +29,17 @@
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
     "node-libs-browser": "^0.5.2",
+    "nuka-carousel": "0.0.17",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.7",
     "react-router": "^0.13.3",
+    "react-style": "^0.5.5",
+    "react-style-webpack-plugin": "^0.4.0",
     "style": "0.0.3",
     "style-loader": "^0.12.3",
     "underscore": "^1.8.3",
     "url-loader": "^0.5.6",
-    "webpack": "^1.9.10",
+    "webpack": "^1.9.11",
     "webpack-body-parser": "^1.11.110"
   }
 }

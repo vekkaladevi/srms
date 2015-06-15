@@ -16,14 +16,14 @@ class Dashboard extends React.Component {
     render () {
 	if (!this.state.ui.loggedIn) {
 	    return (
-		<h1>Welecome User</h1>
+	      <h1>Welecome User</h1>
 	    );
 	}
 	
 	return (
 	  <div className="row">
 	    <div className="col-sm-10 col-sm-offset-1">
-	      <TenantList/>
+	      <TenantList carousel/>
 	    </div>
 	  </div>
 	);
