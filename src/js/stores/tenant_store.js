@@ -8,7 +8,19 @@ class TenantStore extends EventEmitter {
 	this.state = {
             tenants: [
                 { name: "Shiva", phone: "4082349988", email: "shiva@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
+                { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"},
                 { name: "Vishnu", phone: "5102349988", email: "vishnu@devas.com"}
+
             ]
         };
     }

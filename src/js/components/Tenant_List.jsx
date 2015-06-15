@@ -6,6 +6,7 @@ import UserStore from '../stores/user_store';
 
 import { Link } from 'react-router';
 
+const tenantStyles = {};
 class TenantList extends React.Component {
     constructor() {
 	super();
@@ -40,17 +41,19 @@ class TenantList extends React.Component {
 	let tenantList;
 
 	tenants = this.state.db.tenants.map((tenant, id) => 
-	  <li key={id}>
-            <Link to="tenant" params={{tenantId: id}}>
-	    <h3>{tenant.name}</h3>
+	  <div key={id} className="col-md-4 col-sm-6">
+            <div style={tenantStyles.wrapper}>
+              <Link to="tenant" params={{tenantId: id}}>
+	      <h3>{tenant.name}</h3>
             </Link>
 	    <h4>{tenant.phone}</h4>
-	  </li>
+            </div>
+	  </div>
 	);
 
 	if (tenants.length) {
 	    tenantList = (
-		<ul>{tenants}</ul>
+		tenants
 	    );
 	}
 	return tenantList;
@@ -59,12 +62,16 @@ class TenantList extends React.Component {
     render () {
 	return (
 	    <div className="row">
-	      <div className="col-xs-6 col-md-3">
 		{this.renderTenants()}
-	      </div>
 	    </div>
 	);
     }
-}
+};
+
+
+tenantStyles.wrapper = {
+  border: '1px solid grey',
+  margin: '5px 5px 5px 5px'
+};
 
 export default TenantList;

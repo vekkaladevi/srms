@@ -81,7 +81,6 @@ class Login extends React.Component {
     }
 
     renderForm() {
-      console.log("Login" + this.state.loggedIn);
 	if (this.state.loggedIn) {
 	    return 
 	}

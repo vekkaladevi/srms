@@ -21,9 +21,9 @@ class Tenant extends React.Component {
     
     render () {
 	return (
-	    <div className="row">
+          <div className="col-sm-10 col-sm-offset-1">
 		{this.renderTenant()}
-	    </div>
+	  </div>
 	);
     }
 };
@@ -32,7 +32,6 @@ styles.wrapper = {
   marginLeft:'30px',
   marginRight:'30px',
   padding: '10px 20px',
-  overflow: 'hidden',
   background: 'hsl(200, 20%, 20%)',
   color: '#fff'
 };

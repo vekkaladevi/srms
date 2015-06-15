@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
 	
 	return (
 	  <div className="row">
-	    <div className="col-xs-6 col-md-3">
+	    <div className="col-sm-10 col-sm-offset-1">
 	      <TenantList/>
 	    </div>
 	  </div>
