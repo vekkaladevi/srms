@@ -4,6 +4,8 @@ import ComponentMixin from './component_mixin';
 import '../../less/style.less';
 var _ = require('underscore');
 
+import mui from 'material-ui';
+
 class Checkbox extends ComponentMixin {
     constructor(props) {
 	super(props);
@@ -26,32 +28,25 @@ class Checkbox extends ComponentMixin {
 
 	let reqKeys = ['name', 'type', 'value', 'className'];
 	let _props = _.pick(this.props, reqKeys);
-	let _classname = _props.className || "checkbox";    
 	let other = _.omit(this.props, reqKeys);
 	let disabled = this.isFormDisabled() || this.props.disabled;
  	return (
-	    <div className={_classname}>
-		<label>
-		<input  
-	    type="checkbox"
+                <mui.Checkbox
+            label={this.props.label}
 	    name={_props.name}
 	    checked={this.getValue() == true}
-            className={_classname}
-	    disabled = {disabled}
+     	    disabled = {disabled}
             {...other}
-            onChange={this._onChange}
+            onCheck={this._onChange}
 		/>
-		{this.props.label}
-		</label>		
-		</div>
 	);
-  }
-  
+    }
+    
 };
 
 Checkbox.defaultProps = {
-  validationError: '',
-  validationErrors: {},
-  value: ''
+    validationError: '',
+    validationErrors: {},
+    value: ''
 };
 export default Checkbox;

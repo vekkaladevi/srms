@@ -1,5 +1,7 @@
 import React from 'react';  
 import Router from "react-router";
+import mui from 'material-ui';
+
 import '../less/style.less';
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 
@@ -13,11 +15,20 @@ import Tenant from './components/Tenant';
 
 import RouterContext from './lib/router.js';
 
+var ThemeManager = new mui.Styles.ThemeManager();
+
 class App extends React.Component{  
+    
     constructor() {
 	super();
     }
-       
+  
+    
+    getChildContext() {
+        return {
+            muiTheme: ThemeManager.getCurrentTheme()
+        };
+    }
     render() {
 	return (
 		<div>
@@ -29,6 +40,9 @@ class App extends React.Component{
     }
 };
 
+App.childContextTypes = {
+    muiTheme: React.PropTypes.object
+};
 
 let routes = (  
 	<Route name="app" path="/" handler={App}>

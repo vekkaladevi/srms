@@ -1,7 +1,8 @@
 import React from 'react';  
 import '../../less/style.less';
 import {Link} from 'react-router';
-
+import mui from 'material-ui';
+var AppBar = mui.AppBar;
 
 import UserAction from '../actions/user_action';
 import UserStore from '../stores/user_store';
@@ -47,22 +48,9 @@ class MainMenu extends React.Component {
 	}
 
 	return (
-	    <nav className="navbar navbar-inverse">
-	      <div className="container-fluid">
-		<div className="navbar-header">
-		  <a className="navbar-brand" href="#">WebSiteName</a>
-                  <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span className="sr-only">Toggle navigation</span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                  </button>
-		</div>
-		<div>
-		  {userMenu}
-		</div>
-	      </div>
-	    </nav>
+            <AppBar title='SriMaata' iconClassNameRight="muidocs-icon-navigation-expand-more">
+                {userMenu}
+	    </AppBar>
 	);	 
     }
 };

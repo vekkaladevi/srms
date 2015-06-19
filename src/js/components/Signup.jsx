@@ -9,6 +9,9 @@ import AlertPanel from './alert_panel';
 import UserAction from '../actions/user_action';
 import UserStore from '../stores/user_store';
 
+import mui from 'material-ui';
+var RaisedButton = mui.RaisedButton;
+
 class Signup extends React.Component {
     constructor() {
 	super();
@@ -62,39 +65,39 @@ class Signup extends React.Component {
                className="formClassName" 
                onSubmit={this.submitForm.bind(this)} 
                ref="form"
-            >
+               >
 
-	    <Input 
+	        <Input 
                 name="firstName"
 	        label="First Name"
 	        placeholder="First Name"
 	        value=""
 	        validations={{
-	            minLength:4,
-	            maxLength: 50
-		}}
+	                     minLength:4,
+	                     maxLength: 50
+		             }}
                 validationErrors={{
-		    minLength: 'Too short',
-		    maxLength: 'You can not type in more than 50 characters'
-		}}
+		                  minLength: 'Too short',
+		                  maxLength: 'You can not type in more than 50 characters'
+		                  }}
 	        required
-	    />
-	    <Input 
+	        />
+	        <Input 
                 name="lastName"
 	        label="Last Name"
 	        placeholder="Last Name"
 	        value=""
 	        validations={{
-	            minLength:4,
-	            maxLength: 50
-		}}
+	                     minLength:4,
+	                     maxLength: 50
+		             }}
                 validationErrors={{
-		    minLength: 'Too short',
-		    maxLength: 'You can not type in more than 50 characters'
-		}}
+		                  minLength: 'Too short',
+		                  maxLength: 'You can not type in more than 50 characters'
+		                  }}
 	        required
-	    />
-	    <Input 
+	        />
+	        <Input 
                  type="email" 
                  name="email"
                  label="Email Address"
@@ -104,8 +107,8 @@ class Signup extends React.Component {
                  required
                  validations="isEmail" 
                  validationError= 'You have to type valid email'
-	      />
-	      <Input                        
+	        />
+	        <Input                        
                  name="password"
                  required
                  value = "" 
@@ -119,32 +122,29 @@ class Signup extends React.Component {
                  validationErrors={{
 		                   minLength: 'Too short',
 		                   maxLength: 'You can not type in more than 50 characters'
-		 }}
-	    />             
-	    <Checkbox name="terms"
-		      type="checkbox"
-		      label="I agree to the terms and conditions"
-		      value =""
-		      />
-	    <button 
-                className="btn btn-primary btn-lg btn-block" 
-                formNoValidate="" 
-                type="submit"
-		>
-	      Signup
-	    </button>
+		                   }}
+	        />             
+                <div className="signupTerms">
+	            <Checkbox name="terms"
+		              label="I agree to the terms and conditions"
+		              value =""
+		    />
+                </div>
+                <div className="signupSubmit">
+                    <RaisedButton label="Submit" primary={true} />
+                </div>
 	    </Formsy.Form>
 	);
     }
     render() {
 	return (
 	    <div className="container col-md-4 col-md-offset-4">
-	      {this.renderErrors()}
-	      {this.renderForm()}
+	        {this.renderErrors()}
+	        {this.renderForm()}
 	    </div>
 	);
     }
-	   
+    
 };
 
 export default Signup;

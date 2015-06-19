@@ -9,10 +9,13 @@ import UserAction from '../actions/user_action';
 import UserStore from '../stores/user_store';
 
 
+import mui from 'material-ui';
+var RaisedButton = mui.RaisedButton;
+
 class Login extends React.Component {
     constructor() {
-      super();
-      let ui = UserStore.getUserInfo();  
+        super();
+        let ui = UserStore.getUserInfo();  
 	this.state = {
 	    validatePristine: false,
 	    disabled: false,
@@ -96,25 +99,26 @@ class Login extends React.Component {
                onSubmit={this.submitForm.bind(this)} 
                ref="form"
                >
-
-	      <Input 
+                
+	        <Input 
                  type="email" 
                  name="email"
                  label="Email Address"
                  placeholder="Email Address"
                  value="" 
-                 className=""
+                 fullWidth
                  required
                  validations="isEmail" 
                  validationError= 'You have to type valid email'
-	      />
-	      <Input                        
+	        />
+	        <Input                        
                  name="password"
                  required
                  value = "" 
                  label = "Password" 
                  type = "password" 
                  placeholder = "Password"
+                 fullWidth
                  validations={{
 	                      minLength:4,
 	                      maxLength: 50
@@ -123,30 +127,24 @@ class Login extends React.Component {
 		                   minLength: 'Too short',
 		                   maxLength: 'You can not type in more than 50 characters'
 		                   }}
-	    />              
-	    <button 
-                className="btn btn-danger btn-lg btn-block" 
-                formNoValidate="" 
-                type="submit"
-		>
-	      Login
-	    </button>
-		  </Formsy.Form>
+	        />     
+                <div className="loginButton"><RaisedButton label="Login" primary={true} /></div>
+	    </Formsy.Form>
 	);
     }
     
     render() {
 	return (
 	    <div className="container">
-	      <div className="row">
-		<div className="col-md-3"/>
-		<div className="col-md-6 col-xs-12">
-		  {this.renderErrors()}
-		  {this.renderForm()}
+	        <div className="row">
+		    <div className="col-md-3"/>
+		    <div className="col-md-6 col-xs-12">
+		        {this.renderErrors()}
+		        {this.renderForm()}
+		    </div>
+		    <div className="col-md-3"/>
 		</div>
-		<div className="col-md-3"/>
-		</div>
-		</div>
+	    </div>
 	);
     }
 };
