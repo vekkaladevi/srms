@@ -23,14 +23,20 @@ class Input extends ComponentMixin {
     }
     
     render() {
+        let reqKeys = ['label', 'placeholder', 'name', 'type', 'value',
+                       'validations', 'validationError'];
+	let _props = _.pick(this.props, reqKeys);
+        let other = _.omit(this.props, reqKeys);
         return(
             <mui.TextField 
-                   hintText={this.props.placeholder}
-                   floatingLabelText={this.props.label}
-                   name={this.props.name}
+                   floatingLabelText={_props.label}
+                   hintText={_props.placeholder}
+                   name={_props.name}
+                   type={_props.type}
                    value={this.getValue()}
                    errorText={this.getErrorMessage()}
                    onChange={this._onChange}
+                   {...other}
             />
         );
     }

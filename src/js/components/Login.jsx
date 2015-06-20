@@ -101,8 +101,8 @@ class Login extends React.Component {
                >
                 
 	        <Input 
-                 type="email" 
                  name="email"
+                 type="email"
                  label="Email Address"
                  placeholder="Email Address"
                  value="" 
@@ -113,10 +113,10 @@ class Login extends React.Component {
 	        />
 	        <Input                        
                  name="password"
+                 type="password"
                  required
                  value = "" 
                  label = "Password" 
-                 type = "password" 
                  placeholder = "Password"
                  fullWidth
                  validations={{
