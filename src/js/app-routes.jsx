@@ -3,15 +3,18 @@ import Router from "react-router";
 
 import { DefaultRoute, Link, Route, RouteHandler } from 'react-router';
 
-import Master from './master';
+import Master from './components/master';
+import Home from './components/pages/home';
+import AppLeftNav from './components/app-left-nav';
+
 import SignupHandler from './components/Signup';
 import LoginHandler from './components/Login';
 import LogoutHandler from './components/Logout';
 import SettingsHandler from './components/Settings';
 import Dashboard from './components/Dashboard';	
-import MainMenu from './components/MainMenu';
 import Tenant from './components/Tenant';
-import AppLeftNav from './app-left-nav';
+
+
 import RouterContext from './lib/router.js';
 
 let routes = (  
@@ -21,8 +24,8 @@ let routes = (
 	    <Route name="settings" path="/settings" handler={SettingsHandler}/>
 	    <Route name="logout" path="/signout" handler={LogoutHandler}/>
             <Route name="tenant" path="/tenant/:tenantId" handler={Tenant}/>
-            
-	    <DefaultRoute handler={Dashboard} />	      	
+            <Route name="dashboard" path="/dashboard" handler={Dashboard}/>
+            <DefaultRoute handler={Home}/>
 	</Route>
 );
 
