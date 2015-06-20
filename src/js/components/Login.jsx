@@ -94,42 +94,59 @@ class Login extends React.Component {
 	}
 
 	return (
-	    <Formsy.Form 
+            <mui.Paper zDepth={2}>
+                
+	        <Formsy.Form 
                className="formClassName" 
                onSubmit={this.submitForm.bind(this)} 
                ref="form"
                >
-                
-	        <Input 
-                 name="email"
-                 type="email"
-                 label="Email Address"
-                 placeholder="Email Address"
-                 value="" 
-                 fullWidth
-                 required
-                 validations="isEmail" 
-                 validationError= 'You have to type valid email'
-	        />
-	        <Input                        
-                 name="password"
-                 type="password"
-                 required
-                 value = "" 
-                 label = "Password" 
-                 placeholder = "Password"
-                 fullWidth
-                 validations={{
-	                      minLength:4,
-	                      maxLength: 50
-	                      }}
-                 validationErrors={{
-		                   minLength: 'Too short',
-		                   maxLength: 'You can not type in more than 50 characters'
-		                   }}
-	        />     
-                <div className="loginButton"><RaisedButton label="Login" primary={true} /></div>
-	    </Formsy.Form>
+                    <div style={{
+                                color: "#e0e0e0",
+                                fontSize: 24,
+                                fontWeight: 500,
+                                letterSpacing: "0",
+                                lineHeight: "20px",
+                                marginBottom: "0",
+                                padding: "8px",
+                                textTransform: "uppercase"
+                                }}>
+                         Login
+                    </div>
+
+                    
+	            <Input name="email"
+                           type="email"
+                           label="Email Address"
+                           placeholder="Email Address"
+                           value="" 
+                           fullWidth
+                           required
+                           validations="isEmail" 
+                           validationError= 'You have to type valid email'
+	            />
+	            <Input name="password"
+                           type="password"
+                           required
+                           value = "" 
+                           label = "Password" 
+                           placeholder = "Password"
+                           fullWidth
+                           validations={{
+	                                minLength:4,
+	                                maxLength: 50
+	                                }}
+                           validationErrors={{
+		                             minLength: 'Too short',
+		                             maxLength: 'You can not type in more than 50 characters'
+		                             }}
+	            />     
+                    <div style={{ paddingTop: "2em" }}>
+                        <RaisedButton label="Login" primary={true} />
+                    </div>
+	        </Formsy.Form>
+
+            </mui.Paper>
 	);
     }
     

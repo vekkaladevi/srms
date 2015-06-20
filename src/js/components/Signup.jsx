@@ -61,79 +61,90 @@ class Signup extends React.Component {
 	    );
 	}
 	return (
-	    <Formsy.Form 
+            <mui.Paper zDepth={2}>
+	        <Formsy.Form 
                className="formClassName" 
                onSubmit={this.submitForm.bind(this)} 
                ref="form"
                >
 
-	        <Input 
-                name="firstName"
-	        label="First Name"
-	        placeholder="First Name"
-	        value=""
-	        validations={{
-	                     minLength:4,
-	                     maxLength: 50
-		             }}
-                validationErrors={{
-		                  minLength: 'Too short',
-		                  maxLength: 'You can not type in more than 50 characters'
-		                  }}
-	        required
-	        />
-	        <Input 
-                name="lastName"
-	        label="Last Name"
-	        placeholder="Last Name"
-	        value=""
-	        validations={{
-	                     minLength:4,
-	                     maxLength: 50
-		             }}
-                validationErrors={{
-		                  minLength: 'Too short',
-		                  maxLength: 'You can not type in more than 50 characters'
-		                  }}
-	        required
-	        />
-	        <Input 
-                 type="email" 
-                 name="email"
-                 label="Email Address"
-                 placeholder="Email Address"
-                 value="" 
-                 className=""
-                 required
-                 validations="isEmail" 
-                 validationError= 'You have to type valid email'
-	        />
-	        <Input                        
-                 name="password"
-                 required
-                 value = "" 
-                 label = "Password" 
-                 type = "password" 
-                 placeholder = "Password"
-                 validations={{
-	                      minLength:4,
-	                      maxLength: 50
-	                      }}
-                 validationErrors={{
-		                   minLength: 'Too short',
-		                   maxLength: 'You can not type in more than 50 characters'
-		                   }}
-	        />             
-                <div className="signupTerms">
-	            <Checkbox name="terms"
-		              label="I agree to the terms and conditions"
-		              value =""
-		    />
-                </div>
-                <div className="signupSubmit">
-                    <RaisedButton label="Submit" primary={true} />
-                </div>
-	    </Formsy.Form>
+                    <div style={{
+                                color: "#e0e0e0",
+                                fontSize: 24,
+                                fontWeight: 500,
+                                letterSpacing: "0",
+                                lineHeight: "20px",
+                                marginBottom: "0",
+                                padding: "8px",
+                                textTransform: "uppercase"
+                                }}>
+                         Signup
+                    </div>
+
+	            <Input name="firstName"
+	                   label="First Name"
+	                   placeholder="First Name"
+	                   value=""
+	                   validations={{
+	                                minLength:4,
+	                                maxLength: 50
+		                        }}
+                           validationErrors={{
+		                             minLength: 'Too short',
+		                             maxLength: 'You can not type in more than 50 characters'
+		                             }}
+	                   required
+	            />
+	            <Input name="lastName"
+	                   label="Last Name"
+	                   placeholder="Last Name"
+	                   value=""
+	                   validations={{
+	                                minLength:4,
+	                                maxLength: 50
+		                        }}
+                           validationErrors={{
+		                             minLength: 'Too short',
+		                             maxLength: 'You can not type in more than 50 characters'
+		                             }}
+	                   required
+	            />
+	            <Input type="email" 
+                           name="email"
+                           label="Email Address"
+                           placeholder="Email Address"
+                           value="" 
+                           className=""
+                           required
+                           validations="isEmail" 
+                           validationError= 'You have to type valid email'
+	            />
+	            <Input name="password"
+                           required
+                           value = "" 
+                           label = "Password" 
+                           type = "password" 
+                           placeholder = "Password"
+                           validations={{
+	                                minLength:4,
+	                                maxLength: 50
+	                                }}
+                           validationErrors={{
+		                             minLength: 'Too short',
+		                             maxLength: 'You can not type in more than 50 characters'
+		                             }}
+	            />             
+                    <div style={{ paddingTop: "2em" }}>
+	                <Checkbox name="terms"
+		                  label="I agree to the terms and conditions"
+		                  value =""
+		        />
+                    </div>
+                    <div style={{ paddingTop: "1.5em" }}>
+                        <RaisedButton label="Submit" primary={true} />
+                    </div>
+	        </Formsy.Form>
+            </mui.Paper>
 	);
     }
     render() {
