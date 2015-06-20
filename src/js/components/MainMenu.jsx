@@ -46,10 +46,12 @@ class MainMenu extends React.Component {
 		</ul>
 	    );
 	}
-
 	return (
-            <AppBar title='SriMaata' iconClassNameRight="muidocs-icon-navigation-expand-more">
+            <AppBar title='SriMaata' 
+                    onLeftIconButtonTouchTap={this.props.onLeftIconButtonTouchTap}
+                    iconClassNameRight="muidocs-icon-navigation-expand-more">
                 {userMenu}
+                
 	    </AppBar>
 	);	 
     }
