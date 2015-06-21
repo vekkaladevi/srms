@@ -44,8 +44,9 @@ var HomePage = React.createClass({
         overflow: 'hidden'
       },
       svgLogo: {
-        marginLeft: (window.innerWidth * 0.5) - 130 + 'px',
-        width: '460px'
+          marginLeft: (window.innerWidth * 0.5) - 130 + 'px',
+          height: 200,
+          maxWidth:'100%'
       },
       tagline: {
         margin: '16px auto 0 auto',

@@ -47,11 +47,6 @@ var HomeFeature = React.createClass({
         marginRight: '4px',
         marginBottom: '0px'
       },
-      image: {
-        //Not sure why this is needed but it fixes a display
-        //issue in chrome
-        marginBottom: -6,
-      },
       heading: {
         fontSize: '20px',
         paddingTop: 19,
@@ -74,7 +69,13 @@ var HomeFeature = React.createClass({
       },
       rootWhenMediumAndFirstChild: {
         marginLeft: '0px'
-      }
+      },
+        image: {
+            //Not sure why this is needed but it fixes a display
+            //issue in chrome
+            marginBottom: -6,
+            maxWidth:'100%'            
+        }
     };
 
     if (this.isDeviceSize(StyleResizable.statics.Sizes.MEDIUM) || 
@@ -92,7 +93,7 @@ var HomeFeature = React.createClass({
 
   render: function() {
     var styles = this.getStyles();
-
+      
     return (
       <Paper 
         zDepth={this.state.zDepth}
@@ -101,8 +102,8 @@ var HomeFeature = React.createClass({
         style={this.mergeAndPrefix(
           styles.root,
           this.props.lastChild && styles.rootWhenLastChild)}>
-        <h3 style={styles.heading}>{this.props.heading}</h3>
-        <Link to={this.props.route}>
+          <h3 style={styles.heading}>{this.props.heading}</h3>
+          <Link to={this.props.route}>
           <img style={styles.image} src={this.props.img} />
         </Link>
       </Paper>
