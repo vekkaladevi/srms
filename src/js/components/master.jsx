@@ -3,6 +3,7 @@ var Router = require('react-router');
 import { Link } from 'react-router';
 var RouteHandler = Router.RouteHandler;
 var AppLeftNav = require('./app-left-nav.jsx');
+var AppTopNav = require('./app-top-nav.jsx');
 var FullWidthSection = require('./full-width-section.jsx');
 var mui = require('material-ui');
 
@@ -61,7 +62,7 @@ class Master extends React.Component {
           onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap}
           title={title}
           zDepth={0}>
-            <Link to="login">Login</Link>            
+           <AppTopNav/>
         </AppBar>
 
         <AppLeftNav ref="leftNav" />
@@ -73,7 +74,6 @@ class Master extends React.Component {
             Hand crafted with love by the engineers at <a style={styles.a} href="http://call-em-all.com">Call-Em-All</a> and our
             awesome <a style={styles.a} href="https://github.com/callemall/material-ui/graphs/contributors">contributors</a>.
           </p>
-          {githubButton}
         </FullWidthSection>
 
       </AppCanvas>
