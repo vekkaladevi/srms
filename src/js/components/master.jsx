@@ -2,13 +2,13 @@ var React = require('react');
 var Router = require('react-router');
 import { Link } from 'react-router';
 var RouteHandler = Router.RouteHandler;
-var AppLeftNav = require('./app-left-nav.jsx');
-var AppTopNav = require('./app-top-nav.jsx');
-var FullWidthSection = require('./full-width-section.jsx');
+var AppLeftNav = require('./app-left-nav');
+var AppTopNav = require('./app-top-nav');
+var FullWidthSection = require('./full-width-section');
+var MediaQuery = require('react-responsive');
 var mui = require('material-ui');
 
-var Colors = mui.Styles.Colors;
-var Typography = mui.Styles.Typography;
+var {Colors, Typography} = mui.Styles;
 var ThemeManager = new mui.Styles.ThemeManager();
 
 var { AppBar, AppCanvas, IconButton} = mui;
@@ -62,7 +62,9 @@ class Master extends React.Component {
           onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap}
           title={title}
           zDepth={0}>
-           <AppTopNav/>
+            <MediaQuery minWidth={768}>
+                <AppTopNav/>
+            </MediaQuery>
         </AppBar>
 
         <AppLeftNav ref="leftNav" />

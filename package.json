@@ -34,6 +34,7 @@
     "nuka-carousel": "0.0.17",
     "react": "^0.13.3",
     "react-hot-loader": "^1.2.7",
+    "react-responsive": "0.0.6",
     "react-router": "^0.13.3",
     "react-style": "^0.5.5",
     "style": "0.0.3",
