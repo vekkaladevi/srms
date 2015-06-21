@@ -28,8 +28,8 @@ class Master extends React.Component {
     var darkWhite = Colors.darkWhite;
     return {
       footer: {
-        backgroundColor: Colors.grey900,
-        textAlign: 'center'
+          backgroundColor: Colors.grey900,
+          textAlign: 'center'
       },
       a: {
         color: darkWhite

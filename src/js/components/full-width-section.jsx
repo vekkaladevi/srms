@@ -50,13 +50,15 @@ var FullWidthSection = React.createClass({
         let other = _.omit(this.props, reqKeys);
 
 	var styles = this.getStyles();
-        _props.style =  this.mergeAndPrefix(styles.content, _props.contentStyle);
+
+        let styleMerged =  this.mergeAndPrefix(styles.content, _props.contentStyle);
+
         var content;
         if (_props.useContent) {
             content = 
             React.createElement(
                 _props.contentType, 
-                _props.style, 
+                {style: styleMerged},
                 this.props.children
             );
         } else {

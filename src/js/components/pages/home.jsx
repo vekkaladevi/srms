@@ -39,14 +39,16 @@ var HomePage = React.createClass({
 
   _getHomePageHero: function() {
     var styles = {
-      root: {
-        backgroundColor: Colors.cyan500,
-        overflow: 'hidden'
+        root: {
+            backgroundColor: Colors.cyan500,
+            overflow: 'hidden'
       },
       svgLogo: {
-          marginLeft: (window.innerWidth * 0.5) - 130 + 'px',
-          height: 200,
-          maxWidth:'100%'
+          display: 'block',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          width:'50%',
+          height:'50%'
       },
       tagline: {
         margin: '16px auto 0 auto',
