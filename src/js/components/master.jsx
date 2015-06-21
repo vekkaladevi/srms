@@ -1,5 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
+import { Link } from 'react-router';
 var RouteHandler = Router.RouteHandler;
 var AppLeftNav = require('./app-left-nav.jsx');
 var FullWidthSection = require('./full-width-section.jsx');
@@ -9,7 +10,7 @@ var Colors = mui.Styles.Colors;
 var Typography = mui.Styles.Typography;
 var ThemeManager = new mui.Styles.ThemeManager();
 
-var { AppBar, AppCanvas, Menu, IconButton } = mui;
+var { AppBar, AppCanvas, IconButton} = mui;
 
 class Master extends React.Component {
 
@@ -53,22 +54,15 @@ class Master extends React.Component {
       this.context.router.isActive('customization') ? 'Customization' :
       this.context.router.isActive('components') ? 'Components' : 'SreeMaata';
 
-    var githubButton = (
-      <IconButton
-        iconStyle={styles.iconButton}
-        iconClassName="muidocs-icon-custom-github"
-        href="https://github.com/callemall/material-ui"
-        linkButton={true} />
-    );
-
     return (
       <AppCanvas>
 
         <AppBar
           onLeftIconButtonTouchTap={this._onLeftIconButtonTouchTap}
           title={title}
-          zDepth={0}
-          iconElementRight={githubButton}/>
+          zDepth={0}>
+            <Link to="login">Login</Link>            
+        </AppBar>
 
         <AppLeftNav ref="leftNav" />
 
