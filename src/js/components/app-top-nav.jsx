@@ -33,6 +33,7 @@ class AppTopNav extends React.Component {
             paddingLeft: Spacing.desktopGutter,
             paddingTop: '0px',
             marginBottom: '8px',
+
             display: 'inline-block',
             textDecoration:'none'
         };
@@ -52,8 +53,12 @@ class AppTopNav extends React.Component {
         } else {
             userMenu = (
                 <ul>
-                    <Link to='login' style={this.getStyles()}><FlatButton  primary={true}>Login</FlatButton></Link>
-                    <Link to='signup' style={this.getStyles()}><FlatButton secondary={true}>Signup</FlatButton></Link>
+                    <Link to='login' style={this.getStyles()}>
+                    <FlatButton linkButton={true} primary={true} label="Login"/>
+                    </Link>
+                    <Link to='signup' style={this.getStyles()}>
+                    <FlatButton linkButton={true} secondary={true} label="Signup"/>
+                    </Link>
                 </ul>
             );
         }
@@ -64,7 +69,7 @@ class AppTopNav extends React.Component {
     render() {
         let topMenuStyle = {
             float: 'right!important',
-            marginRight:'-15px'
+            marginRight:'-10px'
         };
         return (
             <div style={topMenuStyle}>
