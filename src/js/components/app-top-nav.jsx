@@ -69,7 +69,8 @@ class AppTopNav extends React.Component {
     render() {
         let topMenuStyle = {
             float: 'right!important',
-            marginRight:'-10px'
+            marginRight:'-10px',
+            marginTop:'10px'
         };
         return (
             <div style={topMenuStyle}>
